@@ -130,23 +130,7 @@ http://localhost:8080
 
 Leave the port-forward command running while you use the app.
 
-## File overview
 
-- `index.html`
-  - Main page that loads the board container, status bar, and scripts.
-- `style.css`
-  - Styles for the app shell, chessboard, squares, and piece appearance.
-- `script.js`
-  - Game logic: board state, move generation, check/checkmate detection, and UI interactions.
-- `README.md`
-  - This documentation file.
 
-## Limitations / simplifications
+<img width="1348" height="943" alt="image" src="https://github.com/user-attachments/assets/2b1d3c84-f53e-42ab-8333-ed60dcdbad4a" />
 
-- No advanced chess rules (yet):
-  - No castling
-  - No en passant
-  - No pawn promotion UI
-- No move history or undo button.
-
-These can be added later if you want to expand the project.
