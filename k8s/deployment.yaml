@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chidhvis-chess
+  labels:
+    app: chidhvis-chess
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chidhvis-chess
+  template:
+    metadata:
+      labels:
+        app: chidhvis-chess
+    spec:
+      containers:
+        - name: chidhvis-chess
+          image: chidhvilas/chidhvis-chess:1.0.0
+          ports:
+            - containerPort: 80

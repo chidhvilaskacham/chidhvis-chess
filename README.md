@@ -2,6 +2,13 @@
 
 A simple browser-based chess game built with **HTML, CSS, and JavaScript**.
 
+## Prerequisites
+
+- Docker
+- Docker Compose
+- A Kubernetes cluster (tested with kind)
+- `kubectl` configured to talk to your cluster
+
 ## Features
 
 - **Interactive chessboard**
@@ -28,20 +35,6 @@ A simple browser-based chess game built with **HTML, CSS, and JavaScript**.
   - "New Game" button to reset the board
   - Turn indicator showing whose move it is (and if the side is in check)
 
-## How to run (locally, no Docker)
-
-1. Open the project folder:
-   ```
-   C:\Users\CHID\CascadeProjects\chidhvis-chess
-   ```
-2. Double-click `index.html` to open it in your web browser (Chrome, Edge, etc.).
-3. Start playing:
-   - Click your piece (White starts).
-   - Legal destination squares are highlighted.
-   - Click a highlighted square to make the move.
-
-No build tools or servers are required. Everything runs directly in the browser.
-
 ## Running with Docker
 
 ### Build the image
@@ -50,6 +43,18 @@ From the project root:
 
 ```bash
 docker build -t chidhvis-chess:latest .
+```
+
+The Kubernetes manifests expect an image named `chidhvilas/chidhvis-chess:1.0.0`. To build and tag that image:
+
+```bash
+docker build -t chidhvilas/chidhvis-chess:1.0.0 .
+```
+
+Then push it to Docker Hub (you must be logged in and own the `chidhvilas` namespace):
+
+```bash
+docker push chidhvilas/chidhvis-chess:1.0.0
 ```
 
 ### Run the container
@@ -86,6 +91,44 @@ Stop and clean up:
 ```bash
 docker compose down
 ```
+
+## Running on Kubernetes (kind)
+
+This project includes Kubernetes manifests under the `k8s/` directory for deployment to a kind cluster.
+
+### Prerequisites
+
+- A running [kind](https://kind.sigs.k8s.io/) cluster
+- `kubectl` configured to talk to that cluster
+
+### Apply the manifests
+
+From the project root:
+
+```bash
+kubectl apply -f k8s
+```
+
+This will create:
+
+- A `Deployment` named `chidhvis-chess`
+- A `NodePort` `Service` named `chidhvis-chess` exposing port `80` (NodePort `30080`)
+
+### Accessing the app
+
+Because this is running on kind, the simplest way to access the service from your host is via `kubectl port-forward`:
+
+```bash
+kubectl port-forward service/chidhvis-chess 8080:80
+```
+
+Then open:
+
+```text
+http://localhost:8080
+```
+
+Leave the port-forward command running while you use the app.
 
 ## File overview
 
