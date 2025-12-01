@@ -1,4 +1,4 @@
-# Chidhvi's Chess
+# A Complete Browser-Based Chess Game (Built with Windsurf)
 
 A simple browser-based chess game built with **HTML, CSS, and JavaScript**.
 
